@@ -1,15 +1,36 @@
-
 console.log("task 3");
 
-function getElementWidth(content, padding, border) {
-    const contentWidth = parseFloat(content);
-    const paddingWidth = parseFloat(padding) * 2; // Падінг з обох сторін
-    const borderWidth = parseFloat(border) * 2; // Бордер з обох сторін
-    const totalWidth = contentWidth + paddingWidth + borderWidth;
-    return totalWidth;
+class StringBuilder{
+  #value
+
+  constructor(initialValue){
+    this.#value = initialValue;
   }
-  
-  console.log(getElementWidth("50px", "8px", "4px")); // 74
-  console.log(getElementWidth("60px", "12px", "8.5px")); // 101
-  console.log(getElementWidth("200px", "0px", "0px")); // 200
-  
+
+  getValue(){
+    return this.#value;
+  }
+
+  padEnd(str){
+    this.#value += str;
+  }
+
+  padStart(str){
+    this.#value = str + this.#value;
+  }
+
+  padBoth(str){
+    this.padStart(str);
+    this.padEnd(str);
+  }
+}
+
+const builder = new StringBuilder(".");
+console.log(builder.getValue()); // "."
+builder.padStart("^");
+console.log(builder.getValue()); // "^."
+builder.padEnd("^");
+console.log(builder.getValue()); // "^.^"
+builder.padBoth("=");
+console.log(builder.getValue()); // "=^.^="
+
